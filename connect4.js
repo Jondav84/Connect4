@@ -1,7 +1,5 @@
 /** @format */
 
-// /** @format */
-
 // // create the game class
 class Game {
   //create constructor for the class
@@ -23,12 +21,10 @@ class Game {
     creates the structure of the board in js
     */
   makeBoard() {
-    //an Array of Rows
-    this.board = [];
-    //fill in the array with arrays of cells
-    for (let y = 0; y < this.height; y++) {
-      this.board.push(Array.from({ length: this.width }));
-    }
+    //an Array of Rows//fill in the array with arrays of cells
+    this.board = Array.from({ length: this.height }, () =>
+      Array.from({ length: this.width })
+    );
   }
   /** make html board
     creates the gameboard in html
@@ -82,17 +78,19 @@ class Game {
   }
   /** placeInTable: update DOM to place piece into HTML board */
   placeInTable(y, x) {
-    //create a new html element
+    //create game piece
     const piece = document.createElement("div");
     piece.classList.add("piece");
     piece.style.backgroundColor = this.currentPlayer.color;
     piece.style.top = -50 * (y + 2);
-    //add te new div to the cell
+    //add the game piece to the cell
     const spot = document.getElementById(`${y}-${x}`);
     spot.append(piece);
   }
   /** announces the game over with results */
   endGame(msg) {
+    //added a delay to the message to allow for the game board to show the final piece being dropped and
+    // the colors of the win to be highlighted before the alert appears
     setTimeout(() => {
       alert(msg);
     }, 500);
@@ -217,7 +215,7 @@ class Player {
 }
 //adds event listener to the start new game button
 document.getElementById("start-game").addEventListener("click", () => {
-  //creates the players giving them a color attribute based on the corrisponing inputs
+  //creates the players giving them a color attribute based on the corrisponing input values.
   let p1 = new Player(document.getElementById("p1-color").value);
   let p2 = new Player(document.getElementById("p2-color").value);
   //creates a new game with the p1- p2 as args

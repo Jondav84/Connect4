@@ -20,6 +20,7 @@
   background-color: gold;
 }
 
+/* added background highlights for the winning cells */
 .win-cell {
   background-color: gold;
 }
